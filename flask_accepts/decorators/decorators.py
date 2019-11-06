@@ -2,6 +2,7 @@ from typing import Type, Union
 from flask import jsonify
 from werkzeug.wrappers import Response
 from werkzeug.exceptions import BadRequest, InternalServerError
+from werkzeug.datastructures import FileStorage
 from marshmallow import Schema
 from marshmallow.exceptions import ValidationError
 
@@ -58,6 +59,8 @@ def accepts(
         if qp["type"] == bool:
             # mapping native bool is necessary so that string "false" is not truthy
             _parser.add_argument(qp["name"], type=inputs.boolean, location="values")
+        elif qp["type"] == FileStorage:
+            _parser.add_argument(**qp)
         else:
             _parser.add_argument(**qp, location="values")
 
