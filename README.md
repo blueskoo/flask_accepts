@@ -306,3 +306,6 @@ app = create_app()
 if __name__ == "__main__":
     app.run(debug=True)
 ```
+
+## fork修改
+decorators.py中，兼容FileStorage类型
